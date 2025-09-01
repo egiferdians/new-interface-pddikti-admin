@@ -1,7 +1,13 @@
 import { h } from "preact";
 import * as Icons from "lucide-react";
+import { route } from "preact-router";
+import { useEffect } from "preact/hooks";
 
-export default function Maintenance() {
+export default function Maintenance({ isMaintenance }) {
+  useEffect(() => {
+      if (!isMaintenance) route("/login", true);
+    }, [isMaintenance]);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-700 via-indigo-700 to-blue-800 text-white px-6">
       {/* Icon animasi */}

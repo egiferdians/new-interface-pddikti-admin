@@ -10,7 +10,7 @@ import Maintenance from "./pages/additional/Maintenance";
 
 export default function App() {
   // State maintenance (bisa diganti ke API/config)
-  const [isMaintenance] = useState(false);
+  const [isMaintenance] = useState(true);
 
   // Ambil status login dari localStorage ketika app start
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -62,7 +62,7 @@ export default function App() {
         isAuthenticated={isAuthenticated}
         onLogout={() => setIsAuthenticated(false)}
       />
-      <Maintenance path="/maintenance" />
+      <Maintenance path="/maintenance" isMaintenance={isMaintenance} />
     </Router>
   );
 }

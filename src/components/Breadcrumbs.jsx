@@ -13,7 +13,7 @@ export default function Breadcrumbs() {
 
   return (
     <div className="text-sm font-medium mb-4" aria-label="Breadcrumb">
-      <ol className="flex flex-wrap items-center space-x-2 bg-purple-100 p-2 rounded">
+      <ol className="flex flex-wrap items-center space-x-2 p-2 rounded-lg">
         <li className="flex items-center">
           <Link href="/" className="text-[#41048e] hover:underline flex items-center gap-1">
             <Icons.Home className="w-4 h-4" />

@@ -195,7 +195,7 @@ const menuData = [
       },
       {
         label: 'Download Aplikasi',
-        link: '#',
+        link: '/pelaporan/download-aplikasi',
       },
       {
         label: 'Sync Khusus',

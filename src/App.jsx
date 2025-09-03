@@ -10,6 +10,7 @@ import Maintenance from "./pages/additional/Maintenance";
 import NotFoundPage from "./pages/additional/NotFoundPage";
 import PencarianDataDosen from "./pages/pendidik/data-dosen/pencarian-data-dosen/Index";
 import PerubahanDataPokok from "./pages/kemahasiswaan/perubahan-data-mahasiswa/perubahan-data-pokok/Index";
+import DownloadAplikasi from "./pages/pelaporan/download-aplikasi/Index";
 
 export default function App() {
   // State maintenance (bisa diganti ke API/config)
@@ -67,6 +68,11 @@ export default function App() {
       />
       <PerubahanDataPokok
         path="/kemahasiswaan/perubahan-data-mahasiswa/perubahan-data-pokok"
+        isAuthenticated={isAuthenticated}
+        onLogout={() => setIsAuthenticated(false)}
+      />
+      <DownloadAplikasi
+        path="/pelaporan/download-aplikasi"
         isAuthenticated={isAuthenticated}
         onLogout={() => setIsAuthenticated(false)}
       />

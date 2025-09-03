@@ -7,6 +7,7 @@ import Login from "./pages/auth/Login";
 import Dashboard from "./pages/home/Dashboard";
 import Users from "./pages/manajemen-akses/users/Index";
 import Maintenance from "./pages/additional/Maintenance";
+import NotFoundPage from "./pages/additional/NotFoundPage";
 
 export default function App() {
   // State maintenance (bisa diganti ke API/config)
@@ -63,6 +64,7 @@ export default function App() {
         onLogout={() => setIsAuthenticated(false)}
       />
       <Maintenance path="/maintenance" isMaintenance={isMaintenance} />
+      <NotFoundPage default />
     </Router>
   );
 }

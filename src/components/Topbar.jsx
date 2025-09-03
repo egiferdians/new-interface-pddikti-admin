@@ -95,7 +95,7 @@ const menuData = [
         label: 'Perubahan Data Mahasiswa',
         link: '#',
         children: [
-          { label: 'Perubahan Data Pokok', link: '#' },
+          { label: 'Perubahan Data Pokok', link: '/kemahasiswaan/perubahan-data-mahasiswa/perubahan-data-pokok' },
           { label: 'Perubahan Jenis Keluar', link: '#' },
         ],
       },

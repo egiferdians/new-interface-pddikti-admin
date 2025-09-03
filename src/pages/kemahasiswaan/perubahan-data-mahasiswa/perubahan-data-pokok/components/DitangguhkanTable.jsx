@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
-import SearchableSelect from "../../../../components/SearchableSelect";
+import SearchableSelect from "@/components/SearchableSelect";
 import * as Icons from 'lucide-react';
 
 const cls = (...classes) => classes.filter(Boolean).join(' ');
@@ -154,7 +154,7 @@ export default function UserTable({ apiUrl = 'https://jsonplaceholder.typicode.c
         <div class="bg-white shadow-xl shadow-black/5 ring-1 ring-black/5 rounded-lg p-6">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         {/* Judul */}
-        <h1 class="text-xl sm:text-2xl font-semibold tracking-tight">Daftar User</h1>
+        <h1 class="text-xl sm:text-2xl font-semibold tracking-tight">Daftar Ajuan Ditangguhkan</h1>
 
         {/* Search + Filter */}
         <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -255,28 +255,6 @@ export default function UserTable({ apiUrl = 'https://jsonplaceholder.typicode.c
                               Detail
                             </div>
                           </a>
-
-                          <a href={`/users/${u.id}/edit`} rel="noopener noreferrer" class="relative group">
-                            <button class="p-1 rounded hover:bg-gray-100" aria-label="Edit">
-                              <Icons.Pencil size={18} className="text-green-700" />
-                            </button>
-                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
-                              Edit
-                            </div>
-                          </a>
-
-                          <div class="relative group">
-                            <button
-                              class="p-1 rounded hover:bg-gray-100"
-                              aria-label="Delete"
-                              onClick={() => setDeleteConfirm({ open: true, id: u.id })}
-                            >
-                              <Icons.Trash2 size={18} className="text-red-500" />
-                            </button>
-                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
-                              Hapus
-                            </div>
-                          </div>
                         </div>
                       </td>
 

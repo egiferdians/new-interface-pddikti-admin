@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
-import SearchableSelect from "../../../../components/SearchableSelect";
+import SearchableSelect from "@/components/SearchableSelect";
 import * as Icons from 'lucide-react';
 
 const cls = (...classes) => classes.filter(Boolean).join(' ');
@@ -154,7 +154,7 @@ export default function UserTable({ apiUrl = 'https://jsonplaceholder.typicode.c
         <div class="bg-white shadow-xl shadow-black/5 ring-1 ring-black/5 rounded-lg p-6">
           <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         {/* Judul */}
-        <h1 class="text-xl sm:text-2xl font-semibold tracking-tight">Daftar User</h1>
+        <h1 class="text-xl sm:text-2xl font-semibold tracking-tight">Daftar Ajuan Draft</h1>
 
         {/* Search + Filter */}
         <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">

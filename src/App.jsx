@@ -9,6 +9,7 @@ import Users from "./pages/manajemen-akses/users/Index";
 import Maintenance from "./pages/additional/Maintenance";
 import NotFoundPage from "./pages/additional/NotFoundPage";
 import PencarianDataDosen from "./pages/pendidik/data-dosen/pencarian-data-dosen/Index";
+import PerubahanDataPokok from "./pages/kemahasiswaan/perubahan-data-mahasiswa/perubahan-data-pokok/Index";
 
 export default function App() {
   // State maintenance (bisa diganti ke API/config)
@@ -61,6 +62,11 @@ export default function App() {
       />
       <PencarianDataDosen
         path="/pendidik/pencarian-data-dosen"
+        isAuthenticated={isAuthenticated}
+        onLogout={() => setIsAuthenticated(false)}
+      />
+      <PerubahanDataPokok
+        path="/kemahasiswaan/perubahan-data-mahasiswa/perubahan-data-pokok"
         isAuthenticated={isAuthenticated}
         onLogout={() => setIsAuthenticated(false)}
       />

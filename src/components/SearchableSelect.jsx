@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "preact/hooks";
 import * as Icons from "lucide-react";
 
 export default function SearchableSelect2({
-  label = "Select Option",
+  label = "",
   placeholder = "Select...",
   options = [],
   value,
@@ -39,14 +39,14 @@ export default function SearchableSelect2({
   }, []);
 
   return (
-    <div class="w-full" ref={containerRef}>
+    <div class="w-full relative" ref={containerRef}>
       {label && (
         <label class="block text-sm text-gray-600 mb-1">{label}</label>
       )}
 
       {/* Select Box */}
       <div
-        class="relative w-full rounded-lg border border-gray-300 bg-white px-3 py-0 text-sm flex items-center justify-between cursor-pointer focus-within:ring-2 focus-within:ring-blue-500"
+        class="relative w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm flex items-center justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-900 transition"
         onClick={() => setOpen((prev) => !prev)}
       >
         {selected ? (
@@ -63,7 +63,7 @@ export default function SearchableSelect2({
                 e.stopPropagation();
                 onChange("");
               }}
-              class="p-1 hover:bg-gray-100 rounded"
+              class="hover:bg-gray-100 rounded"
             >
               <Icons.X class="w-4 h-4 text-gray-500" />
             </button>
@@ -78,13 +78,13 @@ export default function SearchableSelect2({
 
       {/* Dropdown */}
       {open && (
-        <div class="absolute mt-1 rounded-lg bg-white shadow-lg border border-gray-200 z-50">
+        <div class="absolute mt-1 w-full rounded-lg bg-white shadow-lg border border-gray-200 z-50">
           {/* Search Box */}
           <div class="p-2 border-b border-gray-200">
             <div class="relative">
               <input
                 type="text"
-                class="w-full pl-2 pr-2 py-1 text-sm rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full pl-2 pr-2 py-1 text-sm rounded w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-900 transition"
                 placeholder="Search..."
                 value={query}
                 onInput={(e) => setQuery(e.target.value)}

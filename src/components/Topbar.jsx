@@ -17,7 +17,7 @@ const menuData = [
         icon: "",
         link: '#',
         children: [
-          { label: 'Pencarian Data Dosen', link: '#' },
+          { label: 'Pencarian Data Dosen', link: '/pendidik/pencarian-data-dosen' },
           { label: 'Dosen Ganda', link: '#' },
           { label: 'Nomor Registrasi Ganda', link: '#' },
           { label: 'Dosen Yang Dihapus', link: '#' },

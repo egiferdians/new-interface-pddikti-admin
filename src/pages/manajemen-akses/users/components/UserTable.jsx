@@ -246,39 +246,39 @@ export default function UserTable({ apiUrl = 'https://jsonplaceholder.typicode.c
                       <td class="py-3 pr-6 text-gray-700">{u.phone}</td>
                       <td class="py-3 pr-6 text-gray-700">{u.company}</td>
                       <td class="py-3 pr-6 text-gray-700 sticky right-0 bg-white">
-  <div class="flex gap-2">
-    <a href={`/users/${u.id}`} rel="noopener noreferrer" class="relative group">
-      <button class="p-1 rounded hover:bg-gray-100" aria-label="Detail">
-        <Icons.Eye size={18} className="text-blue-700" />
-      </button>
-      <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
-        Detail
-      </div>
-    </a>
+                        <div class="flex gap-2">
+                          <a href={`/users/${u.id}`} rel="noopener noreferrer" class="relative group">
+                            <button class="p-1 rounded hover:bg-gray-100" aria-label="Detail">
+                              <Icons.Eye size={18} className="text-blue-700" />
+                            </button>
+                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
+                              Detail
+                            </div>
+                          </a>
 
-    <a href={`/users/${u.id}/edit`} rel="noopener noreferrer" class="relative group">
-      <button class="p-1 rounded hover:bg-gray-100" aria-label="Edit">
-        <Icons.Pencil size={18} className="text-green-700" />
-      </button>
-      <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
-        Edit
-      </div>
-    </a>
+                          <a href={`/users/${u.id}/edit`} rel="noopener noreferrer" class="relative group">
+                            <button class="p-1 rounded hover:bg-gray-100" aria-label="Edit">
+                              <Icons.Pencil size={18} className="text-green-700" />
+                            </button>
+                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
+                              Edit
+                            </div>
+                          </a>
 
-    <div class="relative group">
-      <button
-        class="p-1 rounded hover:bg-gray-100"
-        aria-label="Delete"
-        onClick={() => setDeleteConfirm({ open: true, id: u.id })}
-      >
-        <Icons.Trash2 size={18} className="text-red-500" />
-      </button>
-      <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
-        Hapus
-      </div>
-    </div>
-  </div>
-</td>
+                          <div class="relative group">
+                            <button
+                              class="p-1 rounded hover:bg-gray-100"
+                              aria-label="Delete"
+                              onClick={() => setDeleteConfirm({ open: true, id: u.id })}
+                            >
+                              <Icons.Trash2 size={18} className="text-red-500" />
+                            </button>
+                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block rounded bg-gray-800 px-2 py-1 text-xs text-white z-50">
+                              Hapus
+                            </div>
+                          </div>
+                        </div>
+                      </td>
 
                     </tr>
                   ))

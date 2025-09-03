@@ -8,6 +8,7 @@ import Dashboard from "./pages/home/Dashboard";
 import Users from "./pages/manajemen-akses/users/Index";
 import Maintenance from "./pages/additional/Maintenance";
 import NotFoundPage from "./pages/additional/NotFoundPage";
+import PencarianDataDosen from "./pages/pendidik/data-dosen/pencarian-data-dosen/Index";
 
 export default function App() {
   // State maintenance (bisa diganti ke API/config)
@@ -55,6 +56,11 @@ export default function App() {
       />
       <Dashboard
         path="/"
+        isAuthenticated={isAuthenticated}
+        onLogout={() => setIsAuthenticated(false)}
+      />
+      <PencarianDataDosen
+        path="/pendidik/pencarian-data-dosen"
         isAuthenticated={isAuthenticated}
         onLogout={() => setIsAuthenticated(false)}
       />

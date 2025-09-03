@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "preact/hooks";
 import * as Icons from "lucide-react";
 
 export default function AsyncSingleSelect({
-  label = "Select Option",
+  label = "",
   placeholder = "Select...",
   fetchOptions, // async function(query) => [{id, name}]
   optionKey = "id",
@@ -58,15 +58,19 @@ export default function AsyncSingleSelect({
     setOpen(false);
   };
 
+  const clearValue = (e) => {
+    e.stopPropagation();
+    onChange(null);
+    setQuery("");
+  };
+
   return (
-    <div class="w-full" ref={containerRef}>
-      {label && (
-        <label class="block text-sm text-gray-600 mb-1">{label}</label>
-      )}
+    <div class="w-full relative" ref={containerRef}>
+      {label && <label class="block text-sm text-gray-600 mb-1">{label}</label>}
 
       {/* Select Box */}
       <div
-        class="relative w-full rounded-lg border border-gray-300 bg-white px-2 py-1 text-sm flex items-center justify-between cursor-pointer focus-within:ring-2 focus-within:ring-blue-500 min-h-[38px]"
+        class="relative w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm flex items-center justify-between cursor-pointer focus-within:ring-2 focus-within:ring-blue-500 min-h-[38px]"
         onClick={() => setOpen((prev) => !prev)}
       >
         {selectedItem ? (
@@ -75,11 +79,22 @@ export default function AsyncSingleSelect({
           <span class="text-gray-400">{placeholder}</span>
         )}
 
-        <Icons.ChevronDown
-          class={`w-4 h-4 text-gray-500 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
-        />
+        <div class="flex items-center gap-1">
+          {value && (
+            <button
+              type="button"
+              onClick={clearValue}
+              class="hover:bg-gray-100 rounded"
+            >
+              <Icons.X class="w-4 h-4 text-gray-500" />
+            </button>
+          )}
+          <Icons.ChevronDown
+            class={`w-4 h-4 text-gray-500 transition-transform ${
+              open ? "rotate-180" : ""
+            }`}
+          />
+        </div>
       </div>
 
       {/* Dropdown */}
@@ -88,10 +103,9 @@ export default function AsyncSingleSelect({
           {/* Search Box */}
           <div class="p-2 border-b border-gray-200">
             <div class="relative">
-              <Icons.Search class="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
-                class="w-full pl-8 pr-2 py-1 text-sm rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                class="w-full pl-2 pr-2 py-1 text-sm rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Search..."
                 value={query}
                 onInput={(e) => setQuery(e.target.value)}
@@ -129,15 +143,3 @@ export default function AsyncSingleSelect({
     </div>
   );
 }
-
-{/* <AsyncSingleSelect2
-  label="User"
-  placeholder="Select user..."
-  value={selectedUser}
-  onChange={setSelectedUser}
-  fetchOptions={async (query) => {
-    // contoh API
-    const res = await fetch(`/api/users?search=${query}`);
-    return res.json(); // [{id, name}]
-  }}
-/> */}

@@ -3,137 +3,95 @@ import { useState, useEffect, useRef } from "preact/hooks";
 import * as Icons from "lucide-react";
 
 export default function MultiSelect({
-  label = "Select Options",
-  placeholder = "Select...",
-  options = [],
-  values = [],
-  onChange,
-  optionKey = "id",
-  optionLabel = "name",
+  options = [],          // Array of objects: [{id: 1, name: "Option 1"}, ...]
+  value = [],            // Array of selected IDs
+  onChange,              // Callback saat value berubah
+  optionKey = "id",      // property unik
+  optionLabel = "name",  // property untuk ditampilkan
+  placeholder = "Pilih opsi...",
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const containerRef = useRef(null);
+  const containerRef = useRef();
 
-  const selectedItems = options.filter((opt) =>
-    values.includes(opt[optionKey])
-  );
+  const filteredOptions = query
+    ? options.filter((opt) =>
+        String(opt[optionLabel]).toLowerCase().includes(query.toLowerCase())
+      )
+    : options;
 
-  const filtered =
-    query === ""
-      ? options
-      : options.filter((opt) =>
-          String(opt[optionLabel])
-            .toLowerCase()
-            .includes(query.toLowerCase())
-        );
-
-  // close ketika klik di luar
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setOpen(false);
-      }
+  const toggleOption = (optId) => {
+    if (value.includes(optId)) {
+      onChange(value.filter((v) => v !== optId));
+    } else {
+      onChange([...value, optId]);
     }
+  };
+
+  // klik di luar menutup dropdown
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!containerRef.current?.contains(e.target)) setOpen(false);
+    };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const toggleValue = (id) => {
-    if (values.includes(id)) {
-      onChange(values.filter((v) => v !== id));
-    } else {
-      onChange([...values, id]);
-    }
-  };
-
-  const removeValue = (id) => {
-    onChange(values.filter((v) => v !== id));
-  };
-
   return (
-    <div class="w-full" ref={containerRef}>
-      {label && (
-        <label class="block text-sm text-gray-600 mb-1">{label}</label>
-      )}
-
-      {/* Select Box */}
+    <div class="relative" ref={containerRef}>
       <div
-        class="relative w-full rounded-lg border border-gray-300 bg-white px-2 py-1 text-sm flex items-center flex-wrap gap-1 cursor-pointer focus-within:ring-2 focus-within:ring-blue-500 min-h-[38px]"
-        onClick={() => setOpen((prev) => !prev)}
+        class="w-full border rounded-lg px-3 py-2 cursor-pointer flex flex-wrap gap-1"
+        onClick={() => setOpen(!open)}
       >
-        {selectedItems.length > 0 ? (
-          selectedItems.map((item) => (
+        {value.length === 0 && <span class="text-gray-400">{placeholder}</span>}
+        {value.map((val) => {
+          const opt = options.find((o) => o[optionKey] === val);
+          return (
             <span
-              key={item[optionKey]}
-              class="flex items-center gap-1 bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs"
+              key={val}
+              class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded flex items-center gap-1"
             >
-              {item[optionLabel]}
+              {opt?.[optionLabel]}
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  removeValue(item[optionKey]);
+                  toggleOption(val);
                 }}
               >
-                <Icons.X class="w-3 h-3" />
+                <Icons.X size={12} />
               </button>
             </span>
-          ))
-        ) : (
-          <span class="text-gray-400">{placeholder}</span>
-        )}
-
-        <div class="ml-auto flex items-center">
-          <Icons.ChevronDown
-            class={`w-4 h-4 text-gray-500 transition-transform ${
-              open ? "rotate-180" : ""
-            }`}
-          />
-        </div>
+          );
+        })}
       </div>
 
-      {/* Dropdown */}
       {open && (
-        <div class="absolute mt-1 w-full rounded-lg bg-white shadow-lg border border-gray-200 z-50">
-          {/* Search Box */}
-          <div class="p-2 border-b border-gray-200">
-            <div class="relative">
-              <Icons.Search class="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <div class="absolute z-50 mt-1 w-full bg-white border rounded-lg shadow max-h-40 overflow-y-auto">
+          <input
+            type="text"
+            class="w-full px-3 py-2 border-b border-gray-200 outline-none"
+            placeholder="Cari..."
+            value={query}
+            onInput={(e) => setQuery(e.currentTarget.value)}
+          />
+          {filteredOptions.map((opt) => (
+            <div
+              key={opt[optionKey]}
+              class={`px-3 py-2 cursor-pointer hover:bg-blue-100 flex items-center gap-2 ${
+                value.includes(opt[optionKey]) ? "bg-blue-50" : ""
+              }`}
+              onClick={() => toggleOption(opt[optionKey])}
+            >
               <input
-                type="text"
-                class="w-full pl-8 pr-2 py-1 text-sm rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Search..."
-                value={query}
-                onInput={(e) => setQuery(e.target.value)}
+                type="checkbox"
+                checked={value.includes(opt[optionKey])}
+                readOnly
+                class="cursor-pointer"
               />
+              <span>{opt[optionLabel]}</span>
             </div>
-          </div>
-
-          {/* Options */}
-          <ul class="max-h-52 overflow-y-auto">
-            {filtered.length === 0 ? (
-              <li class="px-3 py-2 text-sm text-gray-500">No results</li>
-            ) : (
-              filtered.map((opt) => {
-                const isSelected = values.includes(opt[optionKey]);
-                return (
-                  <li
-                    key={opt[optionKey]}
-                    onClick={() => toggleValue(opt[optionKey])}
-                    class={`px-3 py-2 text-sm cursor-pointer flex items-center justify-between hover:bg-blue-600 hover:text-white ${
-                      isSelected ? "bg-blue-100" : ""
-                    }`}
-                  >
-                    {opt[optionLabel]}
-                    {isSelected && (
-                      <Icons.Check class="w-4 h-4 text-blue-600" />
-                    )}
-                  </li>
-                );
-              })
-            )}
-          </ul>
+          ))}
         </div>
       )}
     </div>

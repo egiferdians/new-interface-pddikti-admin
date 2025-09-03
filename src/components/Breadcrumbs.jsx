@@ -30,7 +30,7 @@ export default function Breadcrumbs() {
 
           return (
             <li key={href} className="flex items-center flex-shrink-0">
-              <span className="mx-1 text-gray-400">/</span>
+              <span className="mx-1 text-gray-400">{'>'}</span>
               {isLast ? (
                 <span className="text-[#41048e] font-bold dark:text-gray-300 truncate max-w-[120px] sm:max-w-none">
                   {formatLabel(segment)}

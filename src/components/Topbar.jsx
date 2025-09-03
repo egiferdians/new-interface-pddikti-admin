@@ -254,7 +254,7 @@ function MenuItem({ item, depth = 0 }) {
 
   return (
     <li
-      className={`menu-item depth-${depth} ${open ? 'open' : ''}`}
+      className={`menu-item z-50 depth-${depth} ${open ? 'open' : ''}`}
       ref={ref}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

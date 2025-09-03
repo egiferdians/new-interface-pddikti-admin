@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import Accordion from "../../../components/Accordion";
+import Accordion from "@/components/Accordion";
 
 export default function TabDosenBelumS2() {
   // State untuk setiap accordion

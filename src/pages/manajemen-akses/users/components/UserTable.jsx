@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
-import SearchableSelect from "../../../../components/SearchableSelect";
+import SearchableSelect from "@/components/SearchableSelect";
 import * as Icons from 'lucide-react';
 
 const cls = (...classes) => classes.filter(Boolean).join(' ');

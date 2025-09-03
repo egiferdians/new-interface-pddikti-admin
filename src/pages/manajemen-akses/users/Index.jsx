@@ -7,9 +7,9 @@ import {
   getPaginationRowModel,
   flexRender,
 } from "@tanstack/react-table";
-import MainLayout from "../../../layouts/MainLayout";
+import MainLayout from "@/layouts/MainLayout";
 import UserTable from "./components/UserTable";
-import PageHeader from "../../../components/PageHeader";
+import PageHeader from "@/components/PageHeader";
 
 export default function Users({ isAuthenticated, onLogout }) {
   useEffect(() => {

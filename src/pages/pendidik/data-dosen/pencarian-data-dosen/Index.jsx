@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import MainLayout from "../../../../layouts/MainLayout";
+import MainLayout from "@/layouts/MainLayout";
 import PageHeader from "@/components/PageHeader";
 import { route } from "preact-router";
-import SearchableSelect from "../../../../components/SearchableSelect";
-import AsyncSingleSelect from "../../../../components/AsyncSingleSelect";
-import MultiSelect from "../../../../components/MultiSelect";
+import SearchableSelect from "@/components/SearchableSelect";
+import AsyncSingleSelect from "@/components/AsyncSingleSelect";
+import MultiSelect from "@/components/MultiSelect";
 
 const mockLecturers = [
   { name: 'Dr. Andi', faculty: 'Teknik', department: 'Informatika', educationLevel: 'S3' },

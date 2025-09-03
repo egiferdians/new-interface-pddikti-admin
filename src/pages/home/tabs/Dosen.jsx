@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
-import Accordion from "../../../components/Accordion";
-import Box from "../../../components/Box";
+import Accordion from "@/components/Accordion";
+import Box from "@/components/Box";
 import DosenJabfung from './chart/DosenJabfung';
 import DosenJenjangPendidik from './chart/DosenJenjangPendidik';
 import DosenIkatanKerja from './chart/DosenIkatanKerja';
